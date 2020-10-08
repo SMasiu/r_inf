@@ -1,10 +1,11 @@
-with open('jezyki.txt', 'r') as file:
-    next(file)
-    languages = set([line.split('\t')[0] for line in file.read().splitlines()])
+lang_file = open('jezyki.txt', 'r')
+users_file = open('uzytkownicy.txt', 'r')
+result_file = open('result.txt', 'a')
 
-with open('uzytkownicy.txt', 'r') as file:
-    next(file)
-    used_languages = set([line[1] for line in map(lambda l: l.split('\t'), file.read().splitlines()) if line[3] == 'tak'])
+next(lang_file)
+next(users_file)
 
-with open('result.txt', 'a') as result_file:
-    result_file.write("\nZad 5.2\n{}".format(len(languages - used_languages)))
+languages = set([line.split('\t')[0] for line in lang_file.read().splitlines()])
+used_languages = set([line[1] for line in map(lambda l: l.split('\t'), users_file.read().splitlines()) if line[3] == 'tak'])
+
+result_file.write("\nZad 5.2\n{}".format(len(languages - used_languages)))
